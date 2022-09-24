@@ -7,8 +7,9 @@ import axios from 'axios'
  const signup = async(user)=>{ 
   
     const response = await axios.post(`${SERVER_URL}${API_URL}`,user)
+    console.log(response)
     
-    if(response.data){
+    if(response.status){
         localStorage.setItem('user',JSON.stringify(response.data))
 
         

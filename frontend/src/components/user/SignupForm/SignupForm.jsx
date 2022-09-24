@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {signup,reset} from '../../../redux/authSlice'
 
 import './SignupForm.css'
@@ -26,10 +27,23 @@ function SignupForm() {
 
       useEffect(() => {
         if (isError) {
-          alert(message);
+            <Alert key='dange' variant='dange' >
+            User created Succesfully,Please login.
+          </Alert>
           dispatch(reset());
         }
+
+        if(isSuccess){
+           toast.success('User created successfully')
+           navigate('/login')
+          }
+    
+          if(isLoading){
+            alert('loading')
+          }
       },[isError,isLoading,isSuccess,dispatch,message]);
+
+     
       
 
       const handleChange=(prop)=>(event)=>{
