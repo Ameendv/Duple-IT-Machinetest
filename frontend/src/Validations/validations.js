@@ -2,7 +2,7 @@ import * as yup from 'yup'
 
 
 export const signupSchema = yup.object().shape({
-    name: yup.string().min(4, "Name should be minimum 4 letters").required("Enter your name"),
+    name: yup.string().required("Enter your name").min(4, "Name should be minimum 4 letters"),
    
     email: yup
       .string()
@@ -12,8 +12,9 @@ export const signupSchema = yup.object().shape({
      
     password: yup
       .string()
-      .min(8, "Password should be Minimum 8 characters !")
       .required("Enter a password!")
+      .min(8, "Password should be Minimum 8 characters !")
+      
       .matches(/(?=.*[a-z])/, "A lowercase is required!")
       .matches(/(?=.*[A-Z])/, "A uppercase is required!")
       .matches(/(?=.*[0-9])/, "A number is required!"),

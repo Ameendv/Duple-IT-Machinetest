@@ -2,6 +2,8 @@ const express=require('express')
 const app =  express()
 const userController=require('../controllers/user/user')
 
-app.get('/',userController.userSignin)
+app.post('/api/user-signup',userController.userSignup)
+
+
 
 module.exports=app

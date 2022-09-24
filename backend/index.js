@@ -18,7 +18,7 @@ mongoose.connect('mongodb://localhost:27017/DupleITmachineTest').then((done,erro
 
 
 
-app.use(cors())
+app.use(cors({credentials: true,origin:true }))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cookieParser())
@@ -39,9 +39,10 @@ app.use((err, req, res, next) => {
       message: errorMessage,
       stack: err.stack
     })
-  })
+  })  
 
 
 const PORT = process.env.PORT || 5000
+
 
 app.listen(PORT, () => { console.log(`Server started at port ${PORT}`) })  

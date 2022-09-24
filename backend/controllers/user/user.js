@@ -1,7 +1,7 @@
 
 
 module.exports={
-userSignin:(req,res)=>{
-    console.log('login')
+userSignup:(req,res)=>{
+    console.log(req.body)
 }
 }

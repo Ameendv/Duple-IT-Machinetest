@@ -1,4 +1,8 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import {signup,reset} from '../../../redux/authSlice'
+
 import './SignupForm.css'
 import {signupSchema} from '../../../Validations/validations'
 import Alert from 'react-bootstrap/Alert';
@@ -13,18 +17,32 @@ function SignupForm() {
         
       });
       const [error,setError]=useState()
+      const navigate=useNavigate()
+      const dispatch=useDispatch()
+
+      const {user,isLoading,isError,isSuccess,message}=useSelector((state)=>{
+        return state.auth
+      })
+
+      useEffect(() => {
+        if (isError) {
+          alert(message);
+          dispatch(reset());
+        }
+      },[isError,isLoading,isSuccess,dispatch,message]);
       
 
       const handleChange=(prop)=>(event)=>{
         setError()
         setValues({...values,[prop]:event.target.value})
-        console.log(values)
+       
       }
 
       const handleSubmit=async(e)=>{
         e.preventDefault()
         await signupSchema.validate(values,{abortEarly:false}).then((response)=>{
-            console.log(response)
+            console.log(response,'ksdjlafh')
+            dispatch(signup(response))
         }).catch((error)=>{
            setError(error.inner[0].message)
         })
