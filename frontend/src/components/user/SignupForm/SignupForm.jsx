@@ -88,6 +88,7 @@ function SignupForm() {
               Submit
             </button>
           </form>
+          <p className='mt-3'>Already a user? Login</p>
         </div>
       </div>
     </div>
