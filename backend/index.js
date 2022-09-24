@@ -8,16 +8,20 @@ require('dotenv').config()
 const mongoose=require('mongoose')
 
 
-mongoose.connect('mongodb://localhost:27017/DupleITmachineTest').then((done,error)=>{
-    if(error){
-        console.log(error)
-    }else{
-        console.log('Database is connected')
-    }
-})
+const url = process.env.MONGODB_URL;
 
-
-
+const connectionParams={
+  useNewUrlParser: true,
+  
+  useUnifiedTopology: true 
+}
+mongoose.connect(url,connectionParams)
+  .then( () => {
+      console.log('Connected to the database ')
+  })
+  .catch( (err) => {
+      console.error(`Error connecting to the database. n${err}`);
+  })
 app.use(cors({credentials: true,origin:true }))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))

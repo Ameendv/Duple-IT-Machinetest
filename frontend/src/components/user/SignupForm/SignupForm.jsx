@@ -6,6 +6,7 @@ import {signup,reset} from '../../../redux/authSlice'
 
 import './SignupForm.css'
 import {signupSchema} from '../../../Validations/validations'
+import Spinner from '../../Spinner/Spinner'
 import Alert from 'react-bootstrap/Alert';
 
 function SignupForm() {
@@ -33,15 +34,17 @@ function SignupForm() {
           dispatch(reset());
         }
 
-        if(isSuccess){
+        if(isSuccess){  
            toast.success('User created successfully')
            navigate('/login')
           }
     
-          if(isLoading){
-            alert('loading')
-          }
+        
       },[isError,isLoading,isSuccess,dispatch,message]);
+
+      if(isLoading){
+        return <Spinner />
+      }
 
      
       
