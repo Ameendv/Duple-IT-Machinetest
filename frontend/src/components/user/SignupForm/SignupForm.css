@@ -1,0 +1,10 @@
+.signup-form{
+    max-width:350px;
+}
+
+.row-container{
+   display:flex;
+   flex-direction: row;
+   justify-content: center;
+   padding:50px
+}

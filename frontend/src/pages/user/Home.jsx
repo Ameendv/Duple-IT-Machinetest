@@ -3,7 +3,7 @@ import Videos from '../../components/user/Videos/Videos'
 
 function Home() {
   return (
-    <div>
+    <div className='Home'>
       <Videos />
     </div>
   )
