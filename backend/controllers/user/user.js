@@ -18,5 +18,9 @@ userSignup:async(req,res,next)=>{
         res.status(500).json('Something went wrong')
     })
     
+},
+userLogin:async(req,res)=>{
+    console.log(req.body)
+    res.send(req.body)
 }
 }
