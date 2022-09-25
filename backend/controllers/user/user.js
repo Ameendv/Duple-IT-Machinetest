@@ -1,6 +1,8 @@
 const createError=require('../../errorStructure/errors')
 const bcrypt=require('bcrypt')
 const User=require('../../models/userModel')
+const Video=require('../../models/videoModels')
+
 const jwt=require('jsonwebtoken')
 
 module.exports={
