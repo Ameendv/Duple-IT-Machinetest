@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Form from "react-bootstrap/Form";
+import { SERVER_URL } from "../../../constants/serverUrl";
 
 function VideoUpload() {
   const [image, setImage] = useState();
@@ -18,7 +19,14 @@ function VideoUpload() {
       )
       .then((response) => {
         console.log(response);
-        toast.success('Video uploaded successfully')
+       if(response.status===200){
+       const token=localStorage.getItem('token')
+       const data={url:response.data.url}
+       const config={headers:{token:token}}
+       axios.post(`${SERVER_URL}/api/upload-video`,data,config)
+       .then((response)=>{
+        console.log(response)
+       }).catch((error)=>{console.log(error)})}
       }).catch((error)=>{
         console.log(error)
       });
