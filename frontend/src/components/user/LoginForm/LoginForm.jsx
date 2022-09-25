@@ -40,10 +40,11 @@ return state.authLogin
   }
 
   if(isSuccess){  
-     toast.success('User created successfully')
+     toast.success('Logged in ')
+     navigate('/')
      
     }
-  },[])
+  },[isError,isLoading,isSuccess,message])
 
   if(isLoading){
     return <Spins />

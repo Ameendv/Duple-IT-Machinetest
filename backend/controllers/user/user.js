@@ -1,6 +1,7 @@
 const createError=require('../../errorStructure/errors')
 const bcrypt=require('bcrypt')
 const User=require('../../models/userModel')
+const jwt=require('jsonwebtoken')
 
 module.exports={
 userSignup:async(req,res,next)=>{
@@ -19,8 +20,32 @@ userSignup:async(req,res,next)=>{
     })
     
 },
-userLogin:async(req,res)=>{
-    console.log(req.body)
-    res.send(req.body)
+    userLogin: async (req, res, next) => {
+        try {
+            const userExist = await User.findOne({ email: req.body.email })
+            if (userExist) {
+                if (await bcrypt.compare(req.body.password, userExist.password)) {
+                    const userData = { email: userExist.email }
+                    const accessToken = generateAccessToken(userData)
+
+
+
+                    console.log(accessToken, userData)
+
+
+                } else {
+                    return res.status(404).json('Incorrect Password')
+                }
+            } else {
+                return res.status(404).json('User not registered')
+            }
+        } catch (error) {
+            console.log(error)
+        }
 }
 }
+
+function generateAccessToken(user) {
+    
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {algorithm:'HS256', expiresIn: "10m" });
+  }
