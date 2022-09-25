@@ -49,6 +49,7 @@ return state.authLogin
   if(isSuccess){  
     toast.success('Logged in ')
     navigate('/')
+    dispatch(reset());
     
    }
   return (

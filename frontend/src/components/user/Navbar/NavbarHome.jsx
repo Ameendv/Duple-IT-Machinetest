@@ -1,4 +1,5 @@
-import {useEffect,useState} from 'react'
+import React,{useEffect,useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -9,12 +10,18 @@ import './navbar.css'
 
 function NavbarHome() {
 
+  const navigate=useNavigate()
+
   const [user,setUser]=useState()
+
+  const handleAddVideo=()=>{
+    navigate('/add-video')
+  }
 
   useEffect(()=>{
     const logged=localStorage.getItem('user')
    setUser(logged)
-  })
+  },[])
  
   
   return (
@@ -29,7 +36,7 @@ function NavbarHome() {
             navbarScroll
           >
             <Nav.Link href="#action1" className='text-light'>Home</Nav.Link>
-            <Nav.Link href="#action2" className='text-light'>Link</Nav.Link>
+            <Nav.Link href="#action2" className='text-light' onClick={handleAddVideo}>Add videos</Nav.Link>
             
             <Nav.Link href="#" className='text-light'>
               Link
@@ -41,8 +48,8 @@ function NavbarHome() {
               </NavDropdown.Item>
              
             </NavDropdown>): <NavDropdown title="Login" id="navbarScrollingDropdown" className='text-light'>
-              <NavDropdown.Item href="#action3" >Login</NavDropdown.Item>
-              <NavDropdown.Item href="#action4" >
+              <NavDropdown.Item onClick={()=>navigate('/login')}>Login</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>navigate('/signup')}> 
                 Signup
               </NavDropdown.Item>
              

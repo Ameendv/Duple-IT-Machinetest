@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Signup from './pages/user/Signup';
 import Login from './pages/user/Login';
 import Home from './pages/user/Home';
+import AddVideo from './pages/user/AddVideo';
 function App() {
   return (
     <div className="App">
@@ -14,6 +15,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/add-video' element={<AddVideo />} />
         </Routes>
       </Router>
       <ToastContainer />
