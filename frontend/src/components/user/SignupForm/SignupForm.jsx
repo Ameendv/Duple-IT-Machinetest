@@ -28,9 +28,7 @@ function SignupForm() {
 
       useEffect(() => {
         if (isError) {
-            <Alert key='dange' variant='dange' >
-            User created Succesfully,Please login.
-          </Alert>
+            toast.error(message)
           dispatch(reset());
         }
 

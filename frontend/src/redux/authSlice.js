@@ -16,15 +16,17 @@ export const signup = createAsyncThunk('auth/signup', async (user, thunkAPI) => 
         return await authService.signup(user)
     }
     catch (error) {
+       
         
-        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        const message = (error.response && error.response.data && error.response.data) || error.message || error.toString()
+       
         
         return thunkAPI.rejectWithValue(message)
     }
 })
 
 export const authSlice = createSlice({
-    name: 'auth',
+    name: 'auth',   
     initialState,
     reducers: {
         reset: (state) => {

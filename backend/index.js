@@ -7,14 +7,15 @@ const userRouter=require('./routes/user')
 require('dotenv').config()
 const mongoose=require('mongoose')
 
-
+//mongodb datas
 const url = process.env.MONGODB_URL;
-
 const connectionParams={
   useNewUrlParser: true,
   
   useUnifiedTopology: true 
 }
+
+//mongodb atlas mongoose connecting
 mongoose.connect(url,connectionParams)
   .then( () => {
       console.log('Connected to the database ')
@@ -22,6 +23,8 @@ mongoose.connect(url,connectionParams)
   .catch( (err) => {
       console.error(`Error connecting to the database. n${err}`);
   })
+
+
 app.use(cors({credentials: true,origin:true }))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
@@ -31,7 +34,7 @@ app.use(cookieParser())
 app.use('/',userRouter)
 
 
-
+//error handling
 app.use((err, req, res, next) => {
     const errorStatus = err.status || 500
   
