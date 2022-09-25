@@ -4,7 +4,7 @@ const video = new mongoose.Schema(
   {
     url: { type: String, required: true },
 
-    uploadedUser:{type:String},
+    uploadedUser:{type:mongoose.Types.ObjectId,ref:'user'},
     viewers:{type:Array},
 
    

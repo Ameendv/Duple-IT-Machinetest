@@ -4,13 +4,33 @@ import { toast } from "react-toastify";
 import Form from "react-bootstrap/Form";
 import { SERVER_URL } from "../../../constants/serverUrl";
 
+const parseJwt = (token) => {
+  try {
+    return JSON.parse(atob(token.split(".")[1]));
+  } catch (e) {
+    return null;
+  }
+};
+
 function VideoUpload() {
   const [image, setImage] = useState();
 
-  const uploadImage = (files) => {
+  const uploadVideo = (files) => {
+
+
+    
     const formData = new FormData();
     formData.append("file", image);
     formData.append("upload_preset", "vid-tube");
+    var token = JSON.parse(localStorage.getItem("token"));
+    
+    const decodedToken=parseJwt(token)
+    console.log(decodedToken.exp > Date.now())
+    if(decodedToken.exp > Date.now()){
+      localStorage.removeItem('user')
+      localStorage.removeItem('token')
+      return toast.warning('Token expired Login again.')
+    }
 
     axios
       .post(
@@ -19,19 +39,25 @@ function VideoUpload() {
       )
       .then((response) => {
         console.log(response);
-       if(response.status===200){
-       const token=localStorage.getItem('token')
-       const data={url:response.data.url}
-       const config={headers:{token:token}}
-       axios.post(`${SERVER_URL}/api/upload-video`,data,config)
-       .then((response)=>{
-        console.log(response)
-       }).catch((error)=>{console.log(error)})}
-      }).catch((error)=>{
-        console.log(error)
+        if (response.status === 200) {
+          
+          const data = { url: response.data.url };
+          const config = { headers: { token: token } };
+          axios
+            .post(`${SERVER_URL}/api/upload-video`, data, config)
+            .then((response) => {
+              toast.success(response.data)
+            })
+            .catch((error) => {
+              toast.error(error.data)
+            });
+        }
+      })
+      .catch((error) => {
+        toast.error(error.data)
       });
   };
-  return (
+  return (  
     <div
       style={{
         backgroundColor:'#303030',
@@ -48,7 +74,7 @@ function VideoUpload() {
           <Form.Label style={{color:'#fff'}}>Upload your video here</Form.Label>
           <Form.Control type="file" size="lg" onChange={(e)=>{setImage(e.target.files[0])}}/>
         </Form.Group>
-        <input type="button" className='btn' style={{backgroundColor:'#E50914',fontWeight:'bolder',fontSize:'15px',color:'#fff'}} value="Submit" onClick={uploadImage}/>
+        <input type="button" className='btn' style={{backgroundColor:'#E50914',fontWeight:'bolder',fontSize:'15px',color:'#fff'}} value="Submit" onClick={uploadVideo}/>
       </div>
     </div>
   );

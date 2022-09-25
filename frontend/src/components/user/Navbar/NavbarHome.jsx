@@ -35,13 +35,13 @@ function NavbarHome() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link  className='text-light'>Home</Nav.Link>
+            <Nav.Link  className='text-light' onClick={()=>{navigate('/')}} >Home</Nav.Link>
             <Nav.Link  className='text-light' onClick={handleAddVideo}>Add videos</Nav.Link>
             
             <Nav.Link  className='text-light'>
               Link
             </Nav.Link>
-          </Nav>{user?( <NavDropdown title={user} id="navbarScrollingDropdown" className='text-light'>
+          </Nav>{user?( <NavDropdown title={JSON.parse(user)} id="navbarScrollingDropdown" className='text-light'>
 
               <NavDropdown.Item >
                 Logout
