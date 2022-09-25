@@ -27,6 +27,9 @@ function SignupForm() {
       })
 
       useEffect(() => {
+        if(localStorage.getItem('token')){
+          navigate('/')
+        }
         if (isError) {
             toast.error(message)
           dispatch(reset());

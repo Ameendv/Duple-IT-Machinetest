@@ -39,16 +39,18 @@ return state.authLogin
     dispatch(reset());
   }
 
-  if(isSuccess){  
-     toast.success('Logged in ')
-     navigate('/')
-     
-    }
+  
   },[isError,isLoading,isSuccess,message])
 
   if(isLoading){
     return <Spins />
   }
+
+  if(isSuccess){  
+    toast.success('Logged in ')
+    navigate('/')
+    
+   }
   return (
     <div className="container">
     <div className="row bg-light row-container">

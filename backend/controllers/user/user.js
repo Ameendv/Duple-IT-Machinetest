@@ -25,12 +25,13 @@ userSignup:async(req,res,next)=>{
             const userExist = await User.findOne({ email: req.body.email })
             if (userExist) {
                 if (await bcrypt.compare(req.body.password, userExist.password)) {
-                    const userData = { email: userExist.email }
+                    const userData = { email: userExist.email ,name:userExist.name}
                     const accessToken = generateAccessToken(userData)
 
 
 
                     console.log(accessToken, userData)
+                    res.status(200).json({name:userData.name,token:accessToken})
 
 
                 } else {
