@@ -27,7 +27,7 @@ function NavbarHome() {
   return (
     <Navbar style={{backgroundColor:'#303030'}} expand="lg">
       <Container fluid>
-        <Navbar.Brand  style={{ color:'#E50914', fontFamily: 'Secular One,sans-serif'}} href="#">VID TUBE</Navbar.Brand>
+        <Navbar.Brand  style={{ color:'#E50914', fontFamily: 'Secular One,sans-serif'}} >VID TUBE</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -35,15 +35,15 @@ function NavbarHome() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="#action1" className='text-light'>Home</Nav.Link>
-            <Nav.Link href="#action2" className='text-light' onClick={handleAddVideo}>Add videos</Nav.Link>
+            <Nav.Link  className='text-light'>Home</Nav.Link>
+            <Nav.Link  className='text-light' onClick={handleAddVideo}>Add videos</Nav.Link>
             
-            <Nav.Link href="#" className='text-light'>
+            <Nav.Link  className='text-light'>
               Link
             </Nav.Link>
           </Nav>{user?( <NavDropdown title={user} id="navbarScrollingDropdown" className='text-light'>
 
-              <NavDropdown.Item href="#action4" >
+              <NavDropdown.Item >
                 Logout
               </NavDropdown.Item>
              
