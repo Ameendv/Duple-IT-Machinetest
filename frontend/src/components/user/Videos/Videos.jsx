@@ -4,9 +4,14 @@ import { Player } from "video-react";
 import axios from "axios";
 import { SERVER_URL } from "../../../constants/serverUrl";
 
+import Modal from '../../VideoDialogue/VideoDialogue'
+
+
 function Videos() {
   const [videos, setVideos] = useState([]);
   const [player1, setPlayer1] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+  const [url,setUrl]=useState()
 
   const getVideos = () => {
     axios
@@ -28,6 +33,7 @@ function Videos() {
    
   
     player1[index].playbackRate=5
+    player1[index].volume=0
     player1[index].actions.play()
   };
 
@@ -36,23 +42,34 @@ function Videos() {
 
   }
 
-  const handleOnclick=(index)=>{
+  const handleOnclick=(index,url)=>{
     player1[index].playbackRate=1
+    player1[index].volume=5
     player1[index].actions.play()
+    setUrl(url)
+    setModalShow(true)
   }
 
 
 
   return (
-    <div className="container-fluid d-flex flex-direction-row flex-wrap">
+    <div className="container-fluid d-flex flex-direction-row flex-wrap justify-content-center">
+       
+      <Modal
+      url={url}
+     
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+     
       {videos.map((data, index) => {
         return (
           <div
-            className="col-lg-4   col-md-6 col-sm-6 col-xs-12 p-1 "
+            className="p-1 "
             key={index}
             onMouseEnter={()=>{handleHover(index)}}
             onMouseLeave={()=>{handleMouseLeave(index)}}
-            onClick={()=>{handleOnclick(index)}}
+            onClick={()=>{handleOnclick(index,data.url)}}
            
           >
             <Player
