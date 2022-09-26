@@ -17,3 +17,5 @@ install nodejs,mongodb,mongoose
  >added videos are displayed in home page/landing pages
  
  >video can added after signup and login
+ 
+ >Preview video on hovering on the video
