@@ -73,36 +73,39 @@ module.exports = {
   getTrendingVideos: (req, res) => {
     Video.find()
       .then((response) => {
-       
-        for(let index in response){
-          const total=(response[index].viewers).reduce((sum,data)=>{
-            return sum+data
-          })
-          response[index].totalView=total*response[index].viewTime
+        for (let index in response) {
+          const total = response[index].viewers.reduce((sum, data) => {
+            return sum + data;
+          });
+          response[index].totalView = total * response[index].viewTime;
         }
 
-        response.sort((a,b)=>{
-          return b.totalView-a.totalView
-      })
+        response.sort((a, b) => {
+          return b.totalView - a.totalView;
+        });
 
-      console.log(response)
+        console.log(response);
         res.status(200).json(response);
       })
       .catch((error) => {
-        console.log(error); 
+        console.log(error);
       });
   },
-  setViewers:(req,res)=>{
-    console.log(req.body)
-    Video.updateOne({_id:req.body.id},{$inc:{viewTime:req.body.viewedTime}},{$push:{viewers:req.body.viewers}}).then((response)=>{
-      console.log(response)
-    })
-  } 
+  setViewers: (req, res) => {
+    console.log(req.body);
+    Video.updateOne(
+      { _id: req.body.id },
+      { $inc: { viewTime: req.body.viewedTime } },
+      { $push: { viewers: req.body.viewers } }
+    ).then((response) => {
+      console.log(response);
+    });
+  },
 };
 
-function generateAccessToken(user) { 
+function generateAccessToken(user) {
   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
     algorithm: "HS256",
-    expiresIn: "10m", 
+    expiresIn: "10m",
   });
 }
