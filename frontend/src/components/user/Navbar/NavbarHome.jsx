@@ -31,7 +31,7 @@ function NavbarHome() {
   useEffect(()=>{
     const logged=localStorage.getItem('user')
    setUser(logged)
-  },[])
+  },[user])
  
   
   return (

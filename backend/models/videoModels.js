@@ -6,6 +6,7 @@ const video = new mongoose.Schema(
 
     uploadedUser:{type:mongoose.Types.ObjectId,ref:'user'},
     viewers:{type:Array},
+    viewTime:{type:Number,default:0}
 
    
   },

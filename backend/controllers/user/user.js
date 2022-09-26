@@ -76,14 +76,20 @@ module.exports = {
         res.status(200).json(response);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error); 
       });
   },
+  setViewers:(req,res)=>{
+    console.log(req.body)
+    Video.updateOne({_id:req.body.id},{$inc:{viewTime:req.body.viewedTime}},{$push:{viewers:req.body.viewers}}).then((response)=>{
+      console.log(response)
+    })
+  } 
 };
 
-function generateAccessToken(user) {
+function generateAccessToken(user) { 
   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
     algorithm: "HS256",
-    expiresIn: "10m",
+    expiresIn: "10m", 
   });
 }
