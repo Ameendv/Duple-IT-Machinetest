@@ -1,21 +1,31 @@
 import React,{useEffect,useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import {reset} from '../../../redux/authSliceLogin'
 import './navbar.css'
 
 function NavbarHome() {
 
   const navigate=useNavigate()
+  const dispatch=useDispatch()
 
   const [user,setUser]=useState()
 
   const handleAddVideo=()=>{
     navigate('/add-video')
+  }
+
+  const handleLogout = ()=>{
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
+    dispatch(reset())
+    navigate('/')
   }
 
   useEffect(()=>{
@@ -43,7 +53,7 @@ function NavbarHome() {
             </Nav.Link>
           </Nav>{user?( <NavDropdown title={JSON.parse(user)} id="navbarScrollingDropdown" className='text-light'>
 
-              <NavDropdown.Item >
+              <NavDropdown.Item onClick={handleLogout} >
                 Logout
               </NavDropdown.Item>
              

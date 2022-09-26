@@ -8,6 +8,8 @@ app.post('/api/user-login',userController.userLogin)
 
 app.post('/api/upload-video',userController.uploadVideo)
 
+app.get('/api/all-videos',userController.getAllVideos)
+
 
 
 module.exports=app

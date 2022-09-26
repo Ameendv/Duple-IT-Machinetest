@@ -70,6 +70,15 @@ module.exports = {
       console.log(error);
     }
   },
+  getAllVideos: (req, res) => {
+    Video.find()
+      .then((response) => {
+        res.status(200).json(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 };
 
 function generateAccessToken(user) {
