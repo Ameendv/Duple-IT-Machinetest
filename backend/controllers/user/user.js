@@ -71,20 +71,31 @@ module.exports = {
     }
   },
   getTrendingVideos: (req, res) => {
-    Video.find()
-      .then((response) => {
+    Video.aggregate([
+      {
+        $lookup: {
+          from: "user",
+          localField: "uploadedUser",
+          foreignField: "_id",
+          as: "uploadedUser",
+        },
+      },
+    ])
+      .then(async (response) => {
         for (let index in response) {
           const total = response[index].viewers.reduce((sum, data) => {
             return sum + data;
           });
-          response[index].totalView = total * response[index].viewTime;
+          response[index].trendingStatus = total * response[index].viewTime;
+          response[index].totalView = total;
         }
 
         response.sort((a, b) => {
-          return b.totalView - a.totalView;
+          return b.trendingStatus - a.trendingStatus;
         });
 
         console.log(response);
+
         res.status(200).json(response);
       })
       .catch((error) => {
@@ -95,8 +106,10 @@ module.exports = {
     console.log(req.body);
     Video.updateOne(
       { _id: req.body.id },
-      { $inc: { viewTime: req.body.viewedTime } },
-      { $push: { viewers: req.body.viewers } }
+      {
+        $inc: { viewTime: req.body.viewedTime },
+        $push: { viewers: req.body.viewers },
+      }
     ).then((response) => {
       console.log(response);
     });

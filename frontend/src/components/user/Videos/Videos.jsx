@@ -4,6 +4,8 @@ import { Player } from "video-react";
 import axios from "axios";
 import { SERVER_URL } from "../../../constants/serverUrl";
 import {toast} from 'react-toastify'
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 import Modal from "../VideoDialogue/VideoDialogue";
 
@@ -81,9 +83,14 @@ function Videos() {
       {videos.map((data, index) => {
         return (
           <div
-            className="p-1 "
+            className='m-1'
             key={index}
-            onMouseEnter={() => {
+           
+          ><Card style={{ width: '19rem' }} bg='dark'>
+         
+          <Card.Body  bg='dark' >
+            
+            <Card.Text className='p-1' onMouseEnter={() => {
               handleHover(index);
             }}
             onMouseLeave={() => {
@@ -91,10 +98,9 @@ function Videos() {
             }}
             onClick={() => {
               handleOnclick(index, data.url,data._id);
-            }}
-          >
+            }}>
             <Player
-              width={300}
+              width={250}
               height={200}
               fluid={false}
               ref={(player) => {
@@ -102,7 +108,18 @@ function Videos() {
               }}
             >
               <source src={data.url} />
-            </Player>
+            </Player> 
+            </Card.Text>
+          </Card.Body>
+          <ListGroup className="list-group-flush">
+            <ListGroup.Item>Uploaded : {data.uploadedUser[0].name}</ListGroup.Item>
+            <ListGroup.Item>Total views : {data.totalView}</ListGroup.Item>
+              
+          </ListGroup>
+         
+        </Card>
+            
+           
           </div>
         );
       })}

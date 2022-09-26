@@ -46,12 +46,13 @@ function VideoDialogue(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={()=>{
-            props.onHide()
+            
             const { player } = players.getState();
         console.log('user')
         
         setPlayerState(player);
         props.func(playerState);
+        props.onHide()
 
         }}>Close</Button>
       </Modal.Footer>

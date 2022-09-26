@@ -25,8 +25,8 @@ function VideoUpload() {
     var token = JSON.parse(localStorage.getItem("token"));
     
     const decodedToken=parseJwt(token)
-    console.log(decodedToken.exp > Date.now())
-    if(decodedToken.exp > Date.now()){
+    
+    if(!decodedToken ||  decodedToken.exp > Date.now()){
       localStorage.removeItem('user')
       localStorage.removeItem('token')
       return toast.warning('Token expired Login again.')
