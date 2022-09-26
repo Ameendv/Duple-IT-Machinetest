@@ -18,7 +18,7 @@ function VideoDialogue(props) {
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      backdrop={true}
+      backdrop='static'
     >
       <Modal.Header onClick={()=>{
             props.onHide()
@@ -34,8 +34,8 @@ function VideoDialogue(props) {
       <Modal.Body className="d-flex flex-direction-row justify-content-center ">
         <Player
           autoPlay
-          width={300}
-          height={200}
+          width={600}
+          height={400}
           fluid={false}
           ref={(player) => {
             setPlayers(player);

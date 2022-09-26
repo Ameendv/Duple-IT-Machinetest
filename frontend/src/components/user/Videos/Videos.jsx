@@ -5,7 +5,7 @@ import axios from "axios";
 import { SERVER_URL } from "../../../constants/serverUrl";
 import {toast} from 'react-toastify'
 
-import Modal from "../../VideoDialogue/VideoDialogue";
+import Modal from "../VideoDialogue/VideoDialogue";
 
 function Videos() {
   const [videos, setVideos] = useState([]);
@@ -16,7 +16,7 @@ function Videos() {
 
   const getVideos = () => {
     axios
-      .get(`${SERVER_URL}/api/all-videos`)
+      .get(`${SERVER_URL}/api/get-trending-videos`)
       .then((response) => {
         setVideos(response.data);
       })

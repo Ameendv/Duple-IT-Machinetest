@@ -70,9 +70,22 @@ module.exports = {
       console.log(error);
     }
   },
-  getAllVideos: (req, res) => {
+  getTrendingVideos: (req, res) => {
     Video.find()
       .then((response) => {
+       
+        for(let index in response){
+          const total=(response[index].viewers).reduce((sum,data)=>{
+            return sum+data
+          })
+          response[index].totalView=total*response[index].viewTime
+        }
+
+        response.sort((a,b)=>{
+          return b.totalView-a.totalView
+      })
+
+      console.log(response)
         res.status(200).json(response);
       })
       .catch((error) => {
