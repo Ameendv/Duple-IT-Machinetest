@@ -19,3 +19,7 @@ install nodejs,mongodb,mongoose
  >video can added after signup and login
  
  >Preview video on hovering on the video
+ 
+ >video paying on dialogue on click
+ 
+ >trending video is listed at homepage
