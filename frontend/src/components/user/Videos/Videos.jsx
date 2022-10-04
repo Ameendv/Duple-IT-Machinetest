@@ -32,7 +32,7 @@ function Videos() {
   },[]);
 
   const handleHover = (index) => {
-    const { player } = player1[index].getState();
+    const { player } = player1[index].getState();                            
 
     player1[index].playbackRate = 5;
     player1[index].volume = 0;

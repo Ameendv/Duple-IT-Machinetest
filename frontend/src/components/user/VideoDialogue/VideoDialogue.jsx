@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "video-react/dist/video-react.css"; // import css
 import { Player } from "video-react";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 function VideoDialogue(props) {
   const [players, setPlayers] = useState();
