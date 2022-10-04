@@ -2,11 +2,12 @@ const mongoose = require("mongoose");
 
 const video = new mongoose.Schema(
   {
-    url: { type: String, required: true },
+    fileName: { type: String, required: true },
 
     uploadedUser:{type:mongoose.Types.ObjectId,ref:'user'},
-    viewers:{type:Array},
-    viewTime:{type:Number,default:0}
+    viewers:{type:Array,default:0},
+    viewTime:{type:Number,default:0},
+    extension:{type:String}
 
    
   },
